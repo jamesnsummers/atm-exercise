@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Atm.css";
 import { useNavigate } from "react-router-dom";
 
-const DAILY_WITHDRAW_LIMIT = 1000;
+const DAILY_WITHDRAWAL_LIMIT = 1000;
 
 const Atm = (props) => {
   const { title = "Checking Account", loginSuccess } = props;
@@ -29,13 +29,13 @@ const Atm = (props) => {
   const withdraw = () => {
     if (amount > balance) {
       setError("You don't have that much money in here");
-    } else if (amount < balance && totalWithdrawn < DAILY_WITHDRAW_LIMIT) {
+    } else if (amount < balance && totalWithdrawn < DAILY_WITHDRAWAL_LIMIT) {
       const newBalance = balance - amount;
       const newWithdrawalAmount = totalWithdrawn + amount;
       setTotalWithdrawn(newWithdrawalAmount);
       setBalance(newBalance);
       setAmount("");
-    } else if (amount < balance && totalWithdrawn >= DAILY_WITHDRAW_LIMIT) {
+    } else if (amount < balance && totalWithdrawn >= DAILY_WITHDRAWAL_LIMIT) {
       const newWithdrawalAmount = totalWithdrawn + amount;
       setTotalWithdrawn(newWithdrawalAmount);
       setError("You have reached your daily withdrawal limit");
