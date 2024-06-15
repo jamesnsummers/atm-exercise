@@ -22,7 +22,7 @@ const Auth = (props) => {
 
   const handleLogin = () => {
     if (pin === CORRECT_PIN) {
-      setloginSuccess("Welcome back! Login successful!");
+      setloginSuccess("Welcome back!");
       setLoginError("");
       navigate("/atm");
     } else {
