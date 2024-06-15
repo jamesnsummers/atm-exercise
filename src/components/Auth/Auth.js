@@ -26,7 +26,6 @@ const Auth = (props) => {
       setLoginError("");
       navigate("/atm");
     } else {
-      // PIN is incorrect
       setLoginError("Incorrect PIN. Please try again.");
       setloginSuccess("");
     }
@@ -51,6 +50,11 @@ const Auth = (props) => {
       {loginSuccess && (
         <div className="account">
           <div>{loginSuccess}</div>
+          <input
+            type="button"
+            value="View account"
+            onClick={() => navigate("/atm")}
+          />
         </div>
       )}
     </>
