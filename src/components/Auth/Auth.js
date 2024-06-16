@@ -1,9 +1,9 @@
-import React from "react";
-import "./Auth.css";
-import PinInput from "react-pin-input";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import './Auth.css';
+import PinInput from 'react-pin-input';
+import { useNavigate } from 'react-router-dom';
 
-const CORRECT_PIN = "7164";
+const CORRECT_PIN = '7164';
 
 const Auth = (props) => {
   const {
@@ -22,12 +22,12 @@ const Auth = (props) => {
 
   const handleLogin = () => {
     if (pin === CORRECT_PIN) {
-      setloginSuccess("Welcome back!");
-      setLoginError("");
-      navigate("/atm");
+      setloginSuccess('Welcome back!');
+      setLoginError('');
+      navigate('/atm');
     } else {
-      setLoginError("Incorrect PIN. Please try again.");
-      setloginSuccess("");
+      setLoginError('Incorrect PIN. Please try again.');
+      setloginSuccess('');
     }
   };
 
@@ -38,7 +38,7 @@ const Auth = (props) => {
           <h1>Enter your PIN</h1>
           <PinInput
             length={4}
-            type="numeric"
+            type='numeric'
             onComplete={handlePinComplete}
             secret
             secretDelay={500}
@@ -48,12 +48,12 @@ const Auth = (props) => {
         </div>
       )}
       {loginSuccess && (
-        <div className="account">
+        <div className='account'>
           <div>{loginSuccess}</div>
           <input
-            type="button"
-            value="View account"
-            onClick={() => navigate("/atm")}
+            type='button'
+            value='View account'
+            onClick={() => navigate('/atm')}
           />
         </div>
       )}

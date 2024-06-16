@@ -1,4 +1,4 @@
-import Atm from "./Atm";
+import Atm from './Atm';
 
-export * from "./Atm";
+export * from './Atm';
 export default Atm;

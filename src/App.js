@@ -1,21 +1,21 @@
-import React, { useState } from "react";
-import "./App.css";
-import Atm from "./components/Atm";
-import Auth from "./components/Auth";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React, { useState } from 'react';
+import './App.css';
+import Atm from './components/Atm';
+import Auth from './components/Auth';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App() {
-  const [pin, setPin] = useState("");
-  const [loginSuccess, setloginSuccess] = useState("");
-  const [loginError, setLoginError] = useState("");
+  const [pin, setPin] = useState('');
+  const [loginSuccess, setloginSuccess] = useState('');
+  const [loginError, setLoginError] = useState('');
 
   return (
-    <div className="App">
-      <div className="container">
+    <div className='App'>
+      <div className='container'>
         <BrowserRouter>
           <Routes>
             <Route
-              path="/"
+              path='/'
               element={
                 <Auth
                   pin={pin}
@@ -28,7 +28,7 @@ function App() {
               }
             />
             <Route
-              path="/atm"
+              path='/atm'
               element={
                 <Atm loginSuccess={loginSuccess} loginError={loginError} />
               }
