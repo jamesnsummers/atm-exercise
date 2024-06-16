@@ -3,16 +3,16 @@ import './Auth.css';
 import PinInput from 'react-pin-input';
 import { useNavigate } from 'react-router-dom';
 
-const CORRECT_PIN = '7164';
+const CORRECT_PIN = '1234';
 
 const Auth = (props) => {
   const {
     pin,
     setPin,
-    loginSuccess,
-    setloginSuccess,
-    loginError,
-    setLoginError,
+    loginSuccessMessage,
+    setloginSuccessMessage,
+    loginErrorMessage,
+    setLoginErrorMessage,
   } = props;
   const navigate = useNavigate();
 
@@ -22,35 +22,51 @@ const Auth = (props) => {
 
   const handleLogin = () => {
     if (pin === CORRECT_PIN) {
-      setloginSuccess('Welcome back!');
-      setLoginError('');
+      setloginSuccessMessage('Welcome back!');
+      setLoginErrorMessage('');
       navigate('/atm');
     } else {
-      setLoginError('Incorrect PIN. Please try again.');
-      setloginSuccess('');
+      setLoginErrorMessage('Incorrect PIN. Please try again.');
+      setloginSuccessMessage('');
     }
   };
 
   return (
     <>
-      {!loginSuccess && (
-        <div>
-          <h1>Enter your PIN</h1>
+      {!loginSuccessMessage && (
+        <div className='loginScreenContainer'>
+          <h1 className='loginScreenTitle'>Enter your PIN</h1>
           <PinInput
+            inputStyle={{
+              borderRadius: '10px',
+              borderColor: '#ffffff',
+              color: '#ffffff',
+              fontSize: '18px',
+              fontWeight: '600',
+              marginBottom: '1rem',
+            }}
+            inputFocusStyle={{ borderColor: '#009FCF' }}
+            focus
             length={4}
-            type='numeric'
             onComplete={handlePinComplete}
             secret
             secretDelay={500}
+            type='numeric'
           />
-          <button onClick={handleLogin}>SUBMIT</button>
-          {loginError && <p>{loginError}</p>}
+          <button className='button loginButton' onClick={handleLogin}>
+            Enter
+          </button>
+          {loginErrorMessage && (
+            <p className='loginErrorMessage'>{loginErrorMessage}</p>
+          )}
         </div>
       )}
-      {loginSuccess && (
+      {/* When user has already logged in but navigates back to root give them a CTA to access their account */}
+      {loginSuccessMessage && (
         <div className='account'>
-          <div>{loginSuccess}</div>
+          <p className='welcomeMessage'>{loginSuccessMessage} 🎉</p>
           <input
+            className='button viewAccountButton'
             type='button'
             value='View account'
             onClick={() => navigate('/atm')}

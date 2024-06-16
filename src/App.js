@@ -6,12 +6,12 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App() {
   const [pin, setPin] = useState('');
-  const [loginSuccess, setloginSuccess] = useState('');
-  const [loginError, setLoginError] = useState('');
+  const [loginSuccessMessage, setloginSuccessMessage] = useState('');
+  const [loginErrorMessage, setLoginErrorMessage] = useState('');
 
   return (
     <div className='App'>
-      <div className='container'>
+      <div className='atmScreen'>
         <BrowserRouter>
           <Routes>
             <Route
@@ -20,17 +20,21 @@ function App() {
                 <Auth
                   pin={pin}
                   setPin={setPin}
-                  loginSuccess={loginSuccess}
-                  setloginSuccess={setloginSuccess}
-                  loginError={loginError}
-                  setLoginError={setLoginError}
+                  loginSuccessMessage={loginSuccessMessage}
+                  setloginSuccessMessage={setloginSuccessMessage}
+                  loginErrorMessage={loginErrorMessage}
+                  setLoginErrorMessage={setLoginErrorMessage}
                 />
               }
             />
             <Route
               path='/atm'
               element={
-                <Atm loginSuccess={loginSuccess} loginError={loginError} />
+                <Atm
+                  title='Checking Account'
+                  loginSuccessMessage={loginSuccessMessage}
+                  setloginSuccessMessage={setloginSuccessMessage}
+                />
               }
             />
           </Routes>

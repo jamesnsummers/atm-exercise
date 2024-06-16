@@ -1,17 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Atm.css';
 import { useNavigate } from 'react-router-dom';
 
 const DAILY_WITHDRAWAL_LIMIT = 1000;
 
 const Atm = (props) => {
-  const { title = 'Checking Account', loginSuccess } = props;
+  const {
+    title = 'Checking Account',
+    loginSuccessMessage = '',
+    setloginSuccessMessage,
+  } = props;
   const navigate = useNavigate();
 
+  const [showWelcome, setShowWelcome] = useState(true);
   const [balance, setBalance] = useState(50);
   const [showBalance, setShowBalance] = useState(false);
   const [totalWithdrawn, setTotalWithdrawn] = useState(0);
-  const [amount, setAmount] = useState('');
+  const [amount, setAmount] = useState(null);
   const [error, setError] = useState('');
 
   const handleAmountChange = (e) => {
@@ -29,36 +34,46 @@ const Atm = (props) => {
   const withdraw = () => {
     if (amount > balance) {
       setError("You don't have that much money in here");
-    } else if (amount < balance && totalWithdrawn < DAILY_WITHDRAWAL_LIMIT) {
+    } else if (
+      amount < balance &&
+      totalWithdrawn < DAILY_WITHDRAWAL_LIMIT &&
+      amount < DAILY_WITHDRAWAL_LIMIT
+    ) {
       const newBalance = balance - amount;
       const newWithdrawalAmount = totalWithdrawn + amount;
       setTotalWithdrawn(newWithdrawalAmount);
       setBalance(newBalance);
       setAmount('');
-    } else if (amount < balance && totalWithdrawn >= DAILY_WITHDRAWAL_LIMIT) {
+    } else if (
+      amount < balance &&
+      (totalWithdrawn >= DAILY_WITHDRAWAL_LIMIT ||
+        amount > DAILY_WITHDRAWAL_LIMIT)
+    ) {
       const newWithdrawalAmount = totalWithdrawn + amount;
       setTotalWithdrawn(newWithdrawalAmount);
       setError('You have reached your daily withdrawal limit');
     }
   };
 
+  const exit = () => {
+    setloginSuccessMessage('');
+    navigate('/');
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShowWelcome(false);
+    }, 2000);
+  }, []);
+
   return (
     <>
-      {loginSuccess ? (
+      {loginSuccessMessage ? (
         <div className='account'>
-          <h1 className='loginSuccess'>{loginSuccess}</h1>
-          <h2 className='accountTitle'>{title}</h2>
-          {!showBalance && (
-            <input
-              className='showBalanceButton'
-              type='button'
-              value='Show Balance'
-              onClick={setShowBalance}
-            />
+          {showWelcome && (
+            <p className='welcomeMessage'>{loginSuccessMessage} 🎉</p>
           )}
-          {showBalance && (
-            <div className='balance'>Current balance: ${balance}</div>
-          )}
+          <h1 className='accountTitle'>{title}</h1>
           <input
             className='amountInput'
             type='number'
@@ -66,26 +81,50 @@ const Atm = (props) => {
             value={amount}
             onChange={handleAmountChange}
           />
-          <input
-            className='depositButton'
-            type='button'
-            value='Deposit'
-            onClick={deposit}
-          />
-          <input
-            className='withdrawalButton'
-            type='button'
-            value='Withdraw'
-            onClick={withdraw}
-          />
-          {error && <h3>{error}</h3>}
+          <div className='topButtonContainer'>
+            <input
+              className='button depositButton'
+              type='button'
+              value='Deposit'
+              onClick={deposit}
+            />
+            <input
+              className='button showBalanceButton'
+              type='button'
+              value='Balance'
+              onClick={setShowBalance}
+            />
+          </div>
+          <div className='bottomButtonContainer'>
+            <input
+              className='button withdrawalButton'
+              type='button'
+              value='Withdraw'
+              onClick={withdraw}
+            />
+            <input
+              className='button withdrawalButton'
+              type='button'
+              value='Exit'
+              onClick={exit}
+            />
+          </div>
+          <h2 className='balance'>
+            Current balance:{' '}
+            <span className='balanceAmount'>
+              {showBalance ? `$${balance.toFixed(2)}` : ''}
+            </span>
+          </h2>
+          {error && <h2>{error}</h2>}
         </div>
       ) : (
+        // when a user navigates to /atm without first logging in, give them CTA to get to login screen
         <div>
           <h1>Login to access your account</h1>
           <input
+            className='button returnToLoginButton'
             type='button'
-            value='Return to login screen'
+            value='Login'
             onClick={() => navigate('/')}
           />
         </div>

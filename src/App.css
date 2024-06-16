@@ -1,7 +1,41 @@
+.button {
+  background-color: white;
+  border-radius: 48px;
+  cursor: pointer;
+  height: 3rem;
+  font-size: 18px;
+  font-weight: 600;
+  width: 10rem;
+}
 .App {
+  align-items: center;
+  background-color: #e1251b;
+  color: #414142;
+  display: flex;
+  font-family: 'Helvetica';
+  height: 100vh;
+  justify-content: center;
   text-align: center;
-  .container {
+  .atmScreen {
+    align-items: center;
+    background-color: #333333;
+    border-radius: 25px;
+    color: #ffffff;
     display: flex;
-    width: 10rem;
+    height: 30rem;
+    justify-content: center;
+    position: relative;
+    width: 40rem;
   }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  appearance: textfield;
+  -moz-appearance: textfield;
 }
