@@ -25,6 +25,10 @@ A basic ATM (Automated Teller Machine) app
 
 Clone this project to your local machine and use the following scripts to get started.
 
+### `npm install`
+
+Install all necessary packages
+
 ### `npm start`
 
 Runs the app in the development mode.\
