@@ -121,7 +121,7 @@ const Atm = (props) => {
           <h2 className='balance'>
             Current balance:{' '}
             <span className='balanceAmount'>
-              {showBalance ? `$${balance.toFixed(2)}` : ''}
+              {showBalance ? `$${Number(balance).toFixed(2)}` : ''}
             </span>
           </h2>
           {error && <h2 className='errorMessage'>{error}</h2>}
