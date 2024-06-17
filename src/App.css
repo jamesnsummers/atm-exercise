@@ -1,40 +1,50 @@
-.button {
-  background-color: white;
-  border-radius: 48px;
-  cursor: pointer;
-  height: 3rem;
-  font-size: 18px;
-  font-weight: 600;
-  width: 10rem;
-}
 .app {
   align-items: center;
-  background-color: #e1251b;
-  color: #414142;
+  background-color: #111111;
+  color: #00ff33;
   display: flex;
-  font-family: 'Helvetica';
+  font-family: 'Tiny5', sans-serif;
+  font-weight: 400;
+  font-style: normal;
   height: 100vh;
   justify-content: center;
   text-align: center;
+
   .atmScreen {
     align-items: center;
-    background-color: #333333;
+    background-color: #282828;
     border-radius: 25px;
-    color: #ffffff;
+    box-shadow: 0px 0px 25px 12px #f4eeda;
+    color: #00ff33;
     display: flex;
     height: 30rem;
     justify-content: center;
     position: relative;
     width: 40rem;
   }
+
+  .button {
+    background-color: #000000;
+    border-radius: 10px;
+    box-shadow: 0px 0px 6px 1px #f4eeda;
+    color: #00ff33;
+    cursor: pointer;
+    height: 3rem;
+    font-family: 'Tiny5', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    width: 7rem;
+  }
 }
 
+/* remove default arrow buttons from inputs on Chrome/Safari */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
+/* remove default arrow buttons from inputs on Firefox */
 input[type='number'] {
   appearance: textfield;
   -moz-appearance: textfield;

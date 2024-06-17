@@ -35,18 +35,19 @@ const Auth = (props) => {
     <>
       {!loginSuccessMessage && (
         <div className='loginScreenContainer'>
-          <h1 className='loginScreenTitle'>A-T-M</h1>
+          <h1 className='loginScreenLogo'>A-T-M</h1>
           <h2 className='enterPinTitle'>Enter your PIN</h2>
           <PinInput
             inputStyle={{
               borderRadius: '10px',
-              borderColor: '#ffffff',
-              color: '#ffffff',
+              borderColor: '#f4eeda',
+              color: '#00ff33',
               fontSize: '18px',
+              fontFamily: 'Tiny5',
               fontWeight: '600',
               marginBottom: '1rem',
             }}
-            inputFocusStyle={{ borderColor: '#009FCF' }}
+            inputFocusStyle={{ boxShadow: '0px 0px 6px 1px #00ff33' }}
             focus
             length={4}
             onComplete={handlePinComplete}
@@ -65,7 +66,10 @@ const Auth = (props) => {
       {/* When user has already logged in but navigates back to root give them a CTA to access their account */}
       {loginSuccessMessage && (
         <div className='account'>
-          <p className='welcomeMessage'>{loginSuccessMessage} 🎉</p>
+          <p className='welcomeMessage'>
+            You're already logged in. Click the button below to view your
+            account.
+          </p>
           <input
             className='button viewAccountButton'
             type='button'

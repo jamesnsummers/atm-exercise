@@ -13,9 +13,10 @@
 .welcomeMessage {
   top: 0;
 }
+
 .errorMessage {
   animation: blinker 1s linear;
-  background-color: #ffffff;
+  background-color: #f4eeda;
   border-bottom-right-radius: 25px;
   border-bottom-left-radius: 25px;
   bottom: 0;
@@ -31,34 +32,38 @@
   margin: 0 4rem;
   width: 100%;
 }
+
 .accountTitle {
   text-align: left;
   width: 100%;
 }
 
 .amountInput {
+  background-color: #fcf7eb;
+  border-radius: 10px;
   height: 4rem;
-  font-size: 16px;
+  font-family: 'Tiny5', sans-serif;
+  font-size: 28px;
   margin: 1rem 0;
   text-align: center;
   width: 100%;
 }
 
-.topButtonContainer {
-  align-items: flex-start;
+.topButtonContainer,
+.bottomButtonContainer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin: 1rem 0;
   width: 100%;
 }
+
+.topButtonContainer {
+  align-items: flex-start;
+}
+
 .bottomButtonContainer {
   align-items: flex-end;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: 1rem 0;
-  width: 100%;
 }
 
 .balance {
@@ -66,12 +71,6 @@
   font-weight: 600;
   text-align: left;
   width: 100%;
-  .balanceAmount {
-    border-bottom: 2px solid;
-    display: inline-flex;
-    justify-content: center;
-    min-width: 7rem;
-  }
 }
 
 @media screen and (max-width: 490px) {

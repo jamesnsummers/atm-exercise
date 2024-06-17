@@ -33,23 +33,31 @@ const Atm = (props) => {
 
   const withdraw = () => {
     if (amount > balance && totalWithdrawn < DAILY_WITHDRAWAL_LIMIT) {
-      setError("You don't have that much money in here");
+      // don't let the withdrawal happen and show useful error message without changing totalWithdrawn amount
+      setError('Insufficient funds');
     } else if (
       amount < balance &&
       totalWithdrawn < DAILY_WITHDRAWAL_LIMIT &&
-      amount < DAILY_WITHDRAWAL_LIMIT
+      amount + totalWithdrawn <= DAILY_WITHDRAWAL_LIMIT
     ) {
+      // let the withdrawal happen
       const newBalance = balance - amount;
       const newWithdrawalAmount = totalWithdrawn + amount;
       setTotalWithdrawn(newWithdrawalAmount);
       setBalance(newBalance);
     } else if (totalWithdrawn > DAILY_WITHDRAWAL_LIMIT) {
+      // don't let the withdrawal happen, update the total withdrawn amount, and show useful error message
       const newWithdrawalAmount = totalWithdrawn + amount;
       setTotalWithdrawn(newWithdrawalAmount);
       setError('You have reached your daily withdrawal limit');
     } else if (totalWithdrawn === DAILY_WITHDRAWAL_LIMIT) {
+      // don't let the withdrawal happen and show useful error message without changing totalWithdrawn amount
       setError('You have reached your daily withdrawal limit');
-    } else if (amount < balance && amount >= DAILY_WITHDRAWAL_LIMIT) {
+    } else if (
+      amount < balance &&
+      amount + totalWithdrawn > DAILY_WITHDRAWAL_LIMIT
+    ) {
+      // don't let the withdrawal happen and show useful error message without changing totalWithdrawn amount
       setError('Amount exceeds your daily withdrawal limit');
     }
     setAmount('');
@@ -61,6 +69,7 @@ const Atm = (props) => {
   };
 
   useEffect(() => {
+    // remove welcome message after 2 seconds
     setTimeout(() => {
       setShowWelcome(false);
     }, 2000);
