@@ -36,7 +36,7 @@ const Atm = (props) => {
       // don't let the withdrawal happen and show useful error message without changing totalWithdrawn amount
       setError('Insufficient funds');
     } else if (
-      amount < balance &&
+      amount <= balance &&
       totalWithdrawn < DAILY_WITHDRAWAL_LIMIT &&
       amount + totalWithdrawn <= DAILY_WITHDRAWAL_LIMIT
     ) {
@@ -45,6 +45,7 @@ const Atm = (props) => {
       const newWithdrawalAmount = totalWithdrawn + amount;
       setTotalWithdrawn(newWithdrawalAmount);
       setBalance(newBalance);
+      console.log('newBalance: ', newBalance);
     } else if (totalWithdrawn > DAILY_WITHDRAWAL_LIMIT) {
       // don't let the withdrawal happen, update the total withdrawn amount, and show useful error message
       const newWithdrawalAmount = totalWithdrawn + amount;
