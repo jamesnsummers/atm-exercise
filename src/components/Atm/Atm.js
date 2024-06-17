@@ -16,7 +16,7 @@ const Atm = (props) => {
   const [balance, setBalance] = useState(50);
   const [showBalance, setShowBalance] = useState(false);
   const [totalWithdrawn, setTotalWithdrawn] = useState(0);
-  const [amount, setAmount] = useState(null);
+  const [amount, setAmount] = useState('');
   const [error, setError] = useState('');
 
   const handleAmountChange = (e) => {
@@ -32,7 +32,7 @@ const Atm = (props) => {
   };
 
   const withdraw = () => {
-    if (amount > balance) {
+    if (amount > balance && totalWithdrawn < DAILY_WITHDRAWAL_LIMIT) {
       setError("You don't have that much money in here");
     } else if (
       amount < balance &&
@@ -43,16 +43,16 @@ const Atm = (props) => {
       const newWithdrawalAmount = totalWithdrawn + amount;
       setTotalWithdrawn(newWithdrawalAmount);
       setBalance(newBalance);
-      setAmount('');
-    } else if (
-      amount < balance &&
-      (totalWithdrawn >= DAILY_WITHDRAWAL_LIMIT ||
-        amount > DAILY_WITHDRAWAL_LIMIT)
-    ) {
+    } else if (totalWithdrawn > DAILY_WITHDRAWAL_LIMIT) {
       const newWithdrawalAmount = totalWithdrawn + amount;
       setTotalWithdrawn(newWithdrawalAmount);
       setError('You have reached your daily withdrawal limit');
+    } else if (totalWithdrawn === DAILY_WITHDRAWAL_LIMIT) {
+      setError('You have reached your daily withdrawal limit');
+    } else if (amount < balance && amount >= DAILY_WITHDRAWAL_LIMIT) {
+      setError('Amount exceeds your daily withdrawal limit');
     }
+    setAmount('');
   };
 
   const exit = () => {
@@ -99,7 +99,7 @@ const Atm = (props) => {
             <input
               className='button withdrawalButton'
               type='button'
-              value='Withdraw'
+              value='Withdrawal'
               onClick={withdraw}
             />
             <input
@@ -115,7 +115,7 @@ const Atm = (props) => {
               {showBalance ? `$${balance.toFixed(2)}` : ''}
             </span>
           </h2>
-          {error && <h2>{error}</h2>}
+          {error && <h2 className='errorMessage'>{error}</h2>}
         </div>
       ) : (
         // when a user navigates to /atm without first logging in, give them CTA to get to login screen

@@ -1,3 +1,7 @@
+.loginScreenTitle {
+  font-size: 72px;
+  font-weight: 900;
+}
 .welcomeMessage,
 .loginErrorMessage {
   font-size: 20px;

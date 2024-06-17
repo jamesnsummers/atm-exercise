@@ -10,7 +10,7 @@ function App() {
   const [loginErrorMessage, setLoginErrorMessage] = useState('');
 
   return (
-    <div className='App'>
+    <div className='app'>
       <div className='atmScreen'>
         <BrowserRouter>
           <Routes>

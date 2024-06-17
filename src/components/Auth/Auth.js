@@ -35,7 +35,8 @@ const Auth = (props) => {
     <>
       {!loginSuccessMessage && (
         <div className='loginScreenContainer'>
-          <h1 className='loginScreenTitle'>Enter your PIN</h1>
+          <h1 className='loginScreenTitle'>A-T-M</h1>
+          <h2 className='enterPinTitle'>Enter your PIN</h2>
           <PinInput
             inputStyle={{
               borderRadius: '10px',
