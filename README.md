@@ -14,7 +14,7 @@ A basic ATM (Automated Teller Machine) app
 
 ## Features
 
-- Enter a PIN to identify a unique customer
+- Enter a PIN (1234) to identify a unique customer
 - Query and show the current account balance
 - Simulate the withdrawal of cash
   - A daily withdrawal limit exists
