@@ -45,7 +45,6 @@ const Atm = (props) => {
       const newWithdrawalAmount = totalWithdrawn + amount;
       setTotalWithdrawn(newWithdrawalAmount);
       setBalance(newBalance);
-      console.log('newBalance: ', newBalance);
     } else if (totalWithdrawn > DAILY_WITHDRAWAL_LIMIT) {
       // don't let the withdrawal happen, update the total withdrawn amount, and show useful error message
       const newWithdrawalAmount = totalWithdrawn + amount;
