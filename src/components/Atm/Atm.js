@@ -9,6 +9,7 @@ const Atm = (props) => {
     title = 'Checking Account',
     loginSuccessMessage = '',
     setloginSuccessMessage,
+    setPin,
   } = props;
   const navigate = useNavigate();
 
@@ -26,7 +27,7 @@ const Atm = (props) => {
   };
 
   const deposit = () => {
-    const newBalance = balance + amount;
+    const newBalance = balance + Number(amount);
     setBalance(newBalance);
     setAmount('');
   };
@@ -64,6 +65,7 @@ const Atm = (props) => {
   };
 
   const exit = () => {
+    setPin('');
     setloginSuccessMessage('');
     navigate('/');
   };
@@ -80,7 +82,7 @@ const Atm = (props) => {
       {loginSuccessMessage ? (
         <div className='account'>
           {showWelcome && (
-            <p className='welcomeMessage'>{loginSuccessMessage} 🎉</p>
+            <p className='welcomeMessage'>{loginSuccessMessage} 🤑</p>
           )}
           <h1 className='accountTitle'>{title}</h1>
           <input

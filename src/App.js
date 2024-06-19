@@ -34,6 +34,7 @@ function App() {
                   title='Checking Account'
                   loginSuccessMessage={loginSuccessMessage}
                   setloginSuccessMessage={setloginSuccessMessage}
+                  setPin={setPin}
                 />
               }
             />
